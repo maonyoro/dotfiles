@@ -49,6 +49,6 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 # Elastic Beanstalk
 export PATH=/usr/local/aws/eb/macosx/python2.7/:$PATH
-export AWS_CREDENTIAL_FILE="/Users/yoshii/.elasticbeanstalk/aws_credential_file"
+export AWS_CREDENTIAL_FILE="~/.elasticbeanstalk/aws_credential_file"
 
 
