@@ -82,7 +82,13 @@ NeoBundleCheck
 
 " ====================================================================
 "  coding helper
+
+" Unite.vim: 
 NeoBundle 'Shougo/unite.vim'
+
+" emmet-vim: HTML coding helper
+NeoBundle 'mattn/emmet-vim'
+
 " ------------------------------------------------
 "  Taglist
 "    Ctagsのタグリストを別ウィンドウに表示するプラグイン
