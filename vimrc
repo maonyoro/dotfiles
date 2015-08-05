@@ -1,3 +1,5 @@
+let mapleader = ","
+
 " ====================================================================
 " NeoBundle Plugin Setting:
 "
@@ -9,23 +11,48 @@ call neobundle#begin(expand('~/.vim/bundle/'))
   NeoBundleFetch 'Shougo/neobundle.vim'
 
   " ----------------------------------------------
-  " Coding Helper:
-  "
+  " Unite:
+  " ----------------------------------------------
   NeoBundle 'Shougo/unite.vim'
+  NeoBundle 'Shougo/neomru.vim'
+  NeoBundle 'git://github.com/Shougo/vimproc'
+
+    " global keymap: スペースキーでunite起動
+    nnoremap [unite] <Nop>
+    nmap <Space> [unite]
+    nnoremap [unite]u :<C-u>Unite -no-split<Space>
+    nnoremap [unite]b :<C-u>Unite<Space>buffer<CR>
+    nnoremap [unite]f :<C-u>Unite<Space>file<CR>
+    nnoremap [unite]m :<C-u>Unite<Space>file_mru<CR>
+    nnoremap [unite]r :<C-u>UniteWithBufferDir file<CR>
+
+    " unite-grep
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts = '--nocolor --nogroup'
+    let g:unite_source_grep_recursive_opt = ''
+    let g:unite_source_grep_max_candidates = 200
+    nnoremap <silent> [unite]/  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+    vnoremap / y:Unite grep::-iHRn:<C-R>=escape(@", '\\.*$^[]')<CR><CR>
+
+  " ----------------------------------------------
+  " Coding Helper:
+  " ----------------------------------------------
   NeoBundle 'mattn/emmet-vim'  "for html
+    let g:user_emmet_leader_key='<C-@>' "default:<C-y>
+  " end自動挿入 for Ruby
+  NeoBundle 'tpope/vim-endwise'
   "NeoBundle 'taglist.vim' "taglist for ctags を別windowに表示
   "NeoBundle 'Source-Explorer-srcexpl.vim' "ctags系plugin
 
   " ----------------------------------------------
   " Colorscheme:
-  "
-  "NeoBundle 'altercation/vim-colors-solarized'
+  " ----------------------------------------------
   NeoBundle 'nanotech/jellybeans.vim'
   NeoBundle 'w0ng/vim-hybrid'
 
   " ----------------------------------------------
   " Syntax Highlight:
-  "
+  " ----------------------------------------------
   NeoBundle 'kchmck/vim-coffee-script'
     au BufRead,BufNewFile,BufReadPre *.coffee set filetype=coffee
   NeoBundle 'digitaltoad/vim-jade'
@@ -34,15 +61,26 @@ call neobundle#begin(expand('~/.vim/bundle/'))
     au BufRead,BufNewFile,BufReadPre *.ts set filetype=typescript
 
   " ----------------------------------------------
-  " Other Plugins:
-  "
-  NeoBundle 'tpope/vim-surround' "http://vimblog.hatenablog.com/entry/vim_plugin_surround_vim
+  " Cursor:
+  " ----------------------------------------------
+  """ Surround http://vimblog.hatenablog.com/entry/vim_plugin_surround_vim
+  NeoBundle 'tpope/vim-surround'
+  """ 爆速カーソル移動 'EasyMotion' http://haya14busa.com/mastering-vim-easymotion/
+  NeoBundle 'Lokaltog/vim-easymotion'
+    nmap <Leader>f <Plug>(easymotion-s2)
   NeoBundle 'terryma/vim-multiple-cursors' " http://qiita.com/sachin21/items/cfcb81bf4d1073429b68
     let g:multi_cursor_use_default_mapping=1 "default keymap
     " let g:multi_cursor_next_key='<C-n>'
     " let g:multi_cursor_prev_key='<C-p>'
     " let g:multi_cursor_skip_key='<C-x>'
     " let g:multi_cursor_quit_key='<Esc>'
+
+  " ----------------------------------------------
+  " Other Plugins:
+  " ----------------------------------------------
+  " Tree Explorer
+  NeoBundle 'scrooloose/nerdtree'
+    nnoremap <Leader>e :<C-u>NERDTree<CR>
 
 call neobundle#end()
 NeoBundleCheck
@@ -94,43 +132,82 @@ set statusline=%f%r%=--%p\/100%%--\ [\ format:%{&ff}\ ][\ enc:%{&fileencoding}\ 
 let g:netrw_liststyle = 3
 
 " ====================================================================
-" Keybind:
-"
-
-""" Normal Mode:
-nnoremap t< 10<c-w><
-nnoremap t> 10<c-w>>
-nnoremap t+ 10<c-w>+
-nnoremap t- 10<c-w>-
-nnoremap <c-l> gt
-nnoremap <c-h> gT
-nnoremap <c-j> 10j
-nnoremap <c-k> 10k
+" Keymap:
+"   (プラグイン毎のマッピングはNeoBundle項で)
+" ----------------------------------------------
+" Normal Mode:
+" ----------------------------------------------
+" window size
+nnoremap t< 10<C-w><
+nnoremap t> 10<C-w>>
+nnoremap t+ 10<C-w>+
+nnoremap t- 10<C-w>-
+" tab behavior
+nnoremap <C-l> gt
+nnoremap <C-h> gT
+nnoremap t<C-l> :<C-u>tabmove +1<CR>
+nnoremap t<C-h> :<C-u>tabmove -1<CR>
+" cursor
+nnoremap <C-j> 10j
+nnoremap <C-k> 10k
+" default comma -> shift-;(+)
+nnoremap + ,
+" no-op
 nnoremap Q <Nop>
 nnoremap ZZ <Nop>
 nnoremap ZQ <Nop>
+nnoremap <C-z> <Nop>
 
+" ----------------------------------------------
 """ Insert Mode:
-" <c-o>が便利
-inoremap <c-$> <c-o>$
-inoremap <c-^> <c-o>^
-inoremap <c-h> <c-o>h
-inoremap <c-j> <c-o>j
-inoremap <c-k> <c-o>k
-inoremap <c-l> <c-o>l
+" ----------------------------------------------
+" <c-o>: 一旦NormalModeになってcommand1つ実行、再度InsertModeに
+inoremap <C-e> <C-o>$
+inoremap <C-a> <C-o>^
+" 入力しづらい文字のマッピング
+inoremap <C-f>s ''<Left>
+"inoremap <C-s> ''<Left>
+inoremap <C-f>d ""<Left>
+inoremap <C-t> ""<Left>
+inoremap <C-f>t ~
+inoremap <C-f>i []<Left>
+inoremap <C-f>o ]
+inoremap <C-f>k {}<Left>
+inoremap <C-f>l }
+inoremap <C-f>8 ()<Left>
+inoremap <C-f>, <><Left>
+inoremap <C-f>e =
+inoremap <C-f>4 $
+inoremap <C-f>3 #
+inoremap <C-f>p %
+inoremap <C-f>5 %
+inoremap <C-f>a &
+inoremap <C-f>bk !
+inoremap <C-f>bs \
 
+" 全角入力時でもESCを押せば半角に
+" ESCがleaderコマンド的に働くため、ESC後の1キーアクションが無効になりがちなのでOFF
+"let s:keycode_jis_eisuu = 102
+"let g:eisuu_input_command = "osascript -e 'tell application \"System Events\" to key code " . s:keycode_jis_eisuu . "' &"
+"inoremap <silent> <Esc> <Esc>:call system(g:eisuu_input_command)<CR>
+
+" ----------------------------------------------
 """ Visual Mode:
+" ----------------------------------------------
 " v選択後、*でサーチ
 vnoremap * "zy:let @/ = @z<CR>n
-vnoremap <c-j> 10j
-vnoremap <c-k> 10k
+vnoremap <C-j> 10j
+vnoremap <C-k> 10k
 
+" ----------------------------------------------
 """ Command Mode:
+" ----------------------------------------------
 cnoremap bv bel vnew
 cnoremap cc cursorcolumn
 cnoremap nocc nocursorcolumn
 cnoremap ai autoindent
 cnoremap noai noautoindent
+cnoremap vimrc source ~/.vimrc
 
 " コメント行でoすると次の行もコメントになるのを防止(うまくいかない)
 autocmd filetype * setlocal formatoptions-=ro
