@@ -150,6 +150,7 @@ nnoremap t<C-h> :<C-u>tabmove -1<CR>
 " cursor
 nnoremap <C-j> 10j
 nnoremap <C-k> 10k
+nnoremap ,w <C-w><C-w>
 " default comma -> shift-;(+)
 nnoremap + ,
 " no-op
