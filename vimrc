@@ -158,6 +158,7 @@ nnoremap Q <Nop>
 nnoremap ZZ <Nop>
 nnoremap ZQ <Nop>
 nnoremap <C-z> <Nop>
+nnoremap <C-s> <Nop>
 
 " ----------------------------------------------
 """ Insert Mode:
