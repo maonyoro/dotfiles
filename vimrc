@@ -39,8 +39,16 @@ call neobundle#begin(expand('~/.vim/bundle/'))
   " ----------------------------------------------
   NeoBundle 'mattn/emmet-vim'  "for html
     let g:user_emmet_leader_key='<C-@>' "default:<C-y>
+
   " end自動挿入 for Ruby
   NeoBundle 'tpope/vim-endwise'
+
+  " markdownプレビュー
+  NeoBundle 'kannokanno/previm'
+    let g:previm_open_cmd = 'open -a Google\ Chrome'
+    nnoremap <silent> <Leader>md :<C-u>PrevimOpen<CR>
+    "nnoremap <silent> <Leader>r :call previm#refresh()<CR>
+
   "NeoBundle 'taglist.vim' "taglist for ctags を別windowに表示
   "NeoBundle 'Source-Explorer-srcexpl.vim' "ctags系plugin
 
