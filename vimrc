@@ -37,13 +37,13 @@ call neobundle#begin(expand('~/.vim/bundle/'))
   " ----------------------------------------------
   " Coding Helper:
   " ----------------------------------------------
-  NeoBundle 'mattn/emmet-vim'  "for html
+  NeoBundle 'mattn/emmet-vim'  "for html/css
     let g:user_emmet_leader_key='<C-@>' "default:<C-y>
 
   " end自動挿入 for Ruby
   NeoBundle 'tpope/vim-endwise'
 
-  " markdownプレビュー
+  " markdownプレビュー ,md
   NeoBundle 'kannokanno/previm'
     let g:previm_open_cmd = 'open -a Google\ Chrome'
     nnoremap <silent> <Leader>md :<C-u>PrevimOpen<CR>

@@ -19,7 +19,7 @@ alias vimrc='vim ~/.vimrc'
 set -o vi
 
 # PATH
-export PATH=$HOME/.cabal/bin:/usr/local/development/bin:$PATH
+export PATH=$HOME/.cabal/bin:/usr/local/bin:/usr/local/development/bin:$PATH
 export PATH=$PATH:/usr/local/Cellar/mysql/5.6.23/bin
 
 export DYLD_LIBRARY_PATH=/usr/local/Cellar/mysql/5.6.23/lib:$DYLD_LIBRARY_PATH
@@ -44,11 +44,9 @@ export HISTCONTROL=ignoreboth
 # 拡張find
 alias xfind='find . -type f | xargs grep'
 
-# Add RVM to PATH for scripting
-export PATH="$PATH:$HOME/.rvm/bin"
-
 # Elastic Beanstalk
 export PATH=/usr/local/aws/eb/macosx/python2.7/:$PATH
 export AWS_CREDENTIAL_FILE="~/.elasticbeanstalk/aws_credential_file"
 
-
+# rbenv
+export PATH=~/.rbenv/shims:$PATH
