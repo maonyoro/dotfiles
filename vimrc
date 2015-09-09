@@ -67,6 +67,7 @@ call neobundle#begin(expand('~/.vim/bundle/'))
     au BufRead,BufNewFile,BufReadPre *.jade set filetype=jade
   NeoBundle 'leafgarland/typescript-vim'
     au BufRead,BufNewFile,BufReadPre *.ts set filetype=typescript
+  NeoBundle "slim-template/vim-slim"
 
   " ----------------------------------------------
   " Cursor:
@@ -75,7 +76,7 @@ call neobundle#begin(expand('~/.vim/bundle/'))
   NeoBundle 'tpope/vim-surround'
   """ 爆速カーソル移動 'EasyMotion' http://haya14busa.com/mastering-vim-easymotion/
   NeoBundle 'Lokaltog/vim-easymotion'
-    nmap <Leader>f <Plug>(easymotion-s2)
+    nmap f <Plug>(easymotion-s2)
   NeoBundle 'terryma/vim-multiple-cursors' " http://qiita.com/sachin21/items/cfcb81bf4d1073429b68
     let g:multi_cursor_use_default_mapping=1 "default keymap
     " let g:multi_cursor_next_key='<C-n>'
