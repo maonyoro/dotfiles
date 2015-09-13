@@ -173,8 +173,8 @@ nnoremap <C-s> <Nop>
 """ Insert Mode:
 " ----------------------------------------------
 " <c-o>: 一旦NormalModeになってcommand1つ実行、再度InsertModeに
-inoremap <C-e> <C-o>$
-inoremap <C-a> <C-o>^
+"inoremap <C-e> <C-o>$
+"inoremap <C-a> <C-o>^
 " 入力しづらい文字のマッピング
 inoremap <C-f>s ''<Left>
 "inoremap <C-s> ''<Left>
