@@ -38,7 +38,7 @@ call neobundle#begin(expand('~/.vim/bundle/'))
   " Coding Helper:
   " ----------------------------------------------
   NeoBundle 'mattn/emmet-vim'  "for html/css
-    let g:user_emmet_leader_key='<C-@>' "default:<C-y>
+    let g:user_emmet_leader_key = '<C-@>' "default:<C-y>
 
   " end自動挿入 for Ruby
   NeoBundle 'tpope/vim-endwise'
@@ -177,7 +177,6 @@ nnoremap <C-s> <Nop>
 "inoremap <C-a> <C-o>^
 " 入力しづらい文字のマッピング
 inoremap <C-f>s ''<Left>
-"inoremap <C-s> ''<Left>
 inoremap <C-f>d ""<Left>
 inoremap <C-t> ""<Left>
 inoremap <C-f>t ~
@@ -195,12 +194,6 @@ inoremap <C-f>5 %
 inoremap <C-f>a &
 inoremap <C-f>bk !
 inoremap <C-f>bs \
-
-" 全角入力時でもESCを押せば半角に
-" ESCがleaderコマンド的に働くため、ESC後の1キーアクションが無効になりがちなのでOFF
-"let s:keycode_jis_eisuu = 102
-"let g:eisuu_input_command = "osascript -e 'tell application \"System Events\" to key code " . s:keycode_jis_eisuu . "' &"
-"inoremap <silent> <Esc> <Esc>:call system(g:eisuu_input_command)<CR>
 
 " ----------------------------------------------
 """ Visual Mode:
